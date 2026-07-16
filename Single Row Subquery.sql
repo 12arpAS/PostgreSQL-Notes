@@ -104,7 +104,7 @@ select name from Employees where DepartmentID=
 select name from Employees where salary>
 (select MIN(salary) from Employees);
 
---Display employees whose salary is greater than the average salary and who work in the department named IT.
+--Display employees whose salary is greater than the average salary and who work in the department named IT.(MVIP)
 select name from Employees where salary>
 (select AVG(salary) from Employees)AND DepartmentID=
 (select DepartmentID from Departments where DepartmentName='IT');
