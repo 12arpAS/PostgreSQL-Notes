@@ -405,6 +405,83 @@ JOIN Student as s2
 ON s1.st_name=s2.st_id;
 
 
+--#17- Joins Practice Problems
+---------------------------------------------------------------------------------------
+create table Student(
+  id int primary key,
+  name varchar(100),
+  City char(50)
+);
 
+create table enrollment(
+  id int,
+  course varchar(10),
+  marks int,
+  foreign key(id) references Student(id)
+);
 
+insert into Student(id,name,City)
+values(1,'Arpit','Delhi'),
+      (2,'Rahul','Mumbai'),
+      (3,'Aman','Delhi'),
+      (4,'Riya','Pune');
+
+insert into enrollment(id,course,marks)
+values(1,'SQL',85),
+      (2,'Python',78),
+      (3,'Java',90);
+
+select * from Student;
+select * from enrollment;
+
+--Display the student name and the course they enrolled in.
+ select s.name,e.course from Student as s 
+INNER JOIN enrollment as e 
+ON s.id=e.id;
+
+--Display all students along with the course they enrolled in
+select s.name,e.course from Student as s 
+LEFT JOIN enrollment as e 
+ON s.id=e.id;
+
+--Display all enrollments along with the student name.
+select s.name,e.course from Student as s 
+RIGHT JOIN enrollment as e 
+ON s.id=e.id;
+
+--Display the student name and marks of students who scored more than 80.
+select s.name,e.marks from Student as s
+INNER JOIN enrollment as e
+ON s.id=e.id where e.marks>80;
+
+--Display every student with every course.
+select s.name,e.course from Student as s 
+CROSS JOIN enrollment as e;
+
+--Display all students, including those who have not enrolled, along with their marks.
+select s.name,e.marks from Student as s 
+LEFT JOIN enrollment as e 
+ON s.id=e.id;
+
+--Display the names of students who have not enrolled in any course.
+select s.name from Student as s 
+FULL OUTER JOIN enrollment as e 
+ON s.id=e.id Where e.course IS NULL;
+
+--Display the course and the student name for every enrollment.
+ select s.name,e.course from Student as s 
+INNER JOIN enrollment as e 
+ON s.id=e.id;
+
+--Display the city and the total number of students enrolled from each city.
+select s.City,count(*) from Student as s 
+INNER JOIN enrollment as e 
+ON s.id=e.id 
+GROUP BY City;
+
+--Display the average marks of students from each city.
+select s.City,AVG(marks) from Student as s 
+LEFT JOIN enrollment as e 
+ON s.id=e.id 
+GROUP by s.City;
 
