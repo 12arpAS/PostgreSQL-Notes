@@ -110,7 +110,11 @@ select name from Employees where salary>
 (select DepartmentID from Departments where DepartmentName='IT');
 
 
-
+--Third Highest Salary
+select name from Employees where salary=
+(select MAX(salary)from Employees where salary <
+(select MAX(salary)from Employees where salary <
+(select MAX(salary)from Employees)));
 
 
 
