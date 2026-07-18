@@ -117,7 +117,16 @@ select name from Employees where salary=
 (select MAX(salary)from Employees)));
 
 
+--------NOTES--- We can use Subqueries instead of JOIN for two Tables connected-----
 
+SELECT name, salary
+FROM Employees
+WHERE salary >
+(
+    SELECT AVG(salary)
+    FROM Employees
+    WHERE DepartmentID = 102
+);
 
 
 
